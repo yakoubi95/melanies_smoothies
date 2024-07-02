@@ -2,6 +2,9 @@
 import streamlit as st
 from snowflake.snowpark.functions import col
 
+cnx = st.connection("Snwoflake")
+session = cnx.session()
+
 my_dataframe = session.table("smoothies.public.fruit_options").select(col('fruit_name'))
 #st.dataframe(data=my_dataframe, use_container_width=True)
 
@@ -13,8 +16,7 @@ st.write(
     """
 )
 
-cnx = st.connection("Snwoflake")
-session = cnx.session()
+
 
 name_on_order = st.text_input("Name on smoothie")
 st.write("The name on your smoothie will be: ", name_on_order)
