@@ -52,9 +52,9 @@ if ingredients_list:
             #values ('""" + ingredients_string + """"','""" + name_on_order + """')"""
 
     # Insert statement
-    my_insert_stmt = f"""
+    my_insert_stmt = """
         INSERT INTO smoothies.public.orders (ingredients, name_on_order)
-        VALUES (:1, :2)
+        VALUES (:ingredients, :name_on_order)
     """
     
     #st.write(my_insert_stmt)
