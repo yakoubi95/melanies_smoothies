@@ -34,6 +34,8 @@ ingredients_list = st.multiselect (
 if ingredients_list: 
    #ingredients_string = '' 
     ingredients_string = ' '.join(ingredients_list)
+    ingredients_string = ' '.join(ingredients_list)  # Use space-separated string without extra quotes
+
     for fruit_chosen in ingredients_list:
         ingredients_string += fruit_chosen + ' '
         
@@ -46,9 +48,15 @@ if ingredients_list:
 
     #st.write(ingredients_string)
 
-    my_insert_stmt = """ insert into smoothies.public.orders(ingredients,name_on_order)
-            values ('""" + ingredients_string + """"','""" + name_on_order + """')"""
+    #my_insert_stmt = """ insert into smoothies.public.orders(ingredients,name_on_order)
+            #values ('""" + ingredients_string + """"','""" + name_on_order + """')"""
 
+    # Insert statement
+    my_insert_stmt = f"""
+        INSERT INTO smoothies.public.orders (ingredients, name_on_order)
+        VALUES (:1, :2)
+    """
+    
     #st.write(my_insert_stmt)
     #st.stop()
     
