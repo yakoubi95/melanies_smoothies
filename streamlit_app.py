@@ -49,8 +49,8 @@ if ingredients_list:
      #      values ('""" + ingredients_string + """"','""" + name_on_order + """')"""
 
     my_insert_stmt = """
-        INSERT INTO smoothies.public.orders (ingredients, name_on_order)
-        VALUES (%(ingredients)s, %(name_on_order)s)
+    INSERT INTO smoothies.public.orders (ingredients, name_on_order)
+    VALUES (:ingredients, :name_on_order)
     """
 
     #st.write(my_insert_stmt)
@@ -70,6 +70,7 @@ if ingredients_list:
                 st.error(f"Error inserting data: {e}")
         else:
             st.error("Please enter your name for the order.")
+
 
 
     #if time_to_insert:
