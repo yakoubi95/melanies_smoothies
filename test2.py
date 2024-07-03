@@ -6,8 +6,9 @@ import requests
 
 cnx = st.connection("snowflake")
 session = cnx.session()
-my_dataframe = session.table("smoothies.public.fruit_options").select(col('fruit_name'))
-#st.dataframe(data=my_dataframe, use_container_width=True)
+my_dataframe = session.table("smoothies.public.fruit_options").select(col('fruit_name'),col('SEARCH_ON'))
+st.dataframe(data=my_dataframe, use_container_width=True)
+st.stop()
 
 # Write directly to the app
 st.title(":cup_with_straw: Customize Your Smoothie :cup_with_straw:")
