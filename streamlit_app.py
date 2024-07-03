@@ -12,7 +12,7 @@ st.write(
     """
 )
 
-cnx = st.connection("Snwoflake")
+cnx = st.connection("snwoflake")
 session = cnx.session()
 
 my_dataframe = session.table("smoothies.public.fruit_options").select(col('fruit_name'),col('search_on'))
