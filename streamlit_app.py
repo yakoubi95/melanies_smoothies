@@ -48,9 +48,11 @@ if ingredients_list:
     #my_insert_stmt = """ insert into smoothies.public.orders(ingredients,name_on_order)
      #      values ('""" + ingredients_string + """"','""" + name_on_order + """')"""
 
-    my_insert_stmt = "INSERT INTO smoothies.public.orders (ingredients, name_on_order) VALUES (?, ?)"
+    my_insert_stmt = """
+        INSERT INTO smoothies.public.orders (ingredients, name_on_order)
+        VALUES (%(ingredients)s, %(name_on_order)s)
+    """
 
-    
     #st.write(my_insert_stmt)
     #st.stop()
     
@@ -59,12 +61,16 @@ if ingredients_list:
     if time_to_insert:
         if name_on_order:  # Check if the name is provided
             try:
-                session.cursor().execute(my_insert_stmt, (ingredients_string, name_on_order))
+                session.sql(my_insert_stmt).params({
+                    "ingredients": ingredients_string,
+                    "name_on_order": name_on_order
+                }).collect()
                 st.success('Your smoothie is ordered, ' + name_on_order + '!', icon="✅")
             except Exception as e:
                 st.error(f"Error inserting data: {e}")
         else:
             st.error("Please enter your name for the order.")
+
 
     #if time_to_insert:
      #   session.sql(my_insert_stmt).collect()
